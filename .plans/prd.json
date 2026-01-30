@@ -1,0 +1,99 @@
+{
+  "project": "Lucy Light",
+  "version": "0.1",
+  "domain": "SaaS / e-commerce",
+  "channels": ["email", "paid-social", "search-ads"],
+  "tone": "professional + playful + enterprise",
+  "inputs": [
+    "data/brief.md",
+    "data/brand.md",
+    "data/do-not-say.txt"
+  ],
+  "outputs": [
+    "data/outputs/campaign-brief.md",
+    "data/outputs/email.md",
+    "data/outputs/paid-social.md",
+    "data/outputs/search-ads.md",
+    "data/outputs/eval-report.json"
+  ],
+  "success_criteria": [
+    "All channels generated with consistent messaging",
+    "No banned phrases from do-not-say list",
+    "Claims are grounded in the input brief",
+    "Eval report includes per-channel scores and pass/fail"
+  ],
+  "non_goals": [
+    "No live web scraping",
+    "No ad spend optimization",
+    "No CRM or analytics integration"
+  ],
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "TypeScript CLI skeleton",
+      "description": "Initialize a TS project with a CLI entry point that reads inputs and writes outputs folder structure.",
+      "acceptance": [
+        "npm scripts for build and run",
+        "CLI accepts --brief, --brand, --denylist",
+        "data/outputs/ is created on run"
+      ],
+      "passes": false
+    },
+    {
+      "id": "T2",
+      "title": "Input loading + normalized brief",
+      "description": "Parse input files into a normalized brief object used by all agents.",
+      "acceptance": [
+        "Brief fields extracted: product, audience, value props, proof points",
+        "Brand voice fields extracted",
+        "Denylist loaded and enforced"
+      ],
+      "passes": false
+    },
+    {
+      "id": "T3",
+      "title": "Agent pipeline scaffold",
+      "description": "Implement planner, researcher, writer, reviewer, analyst modules with deterministic flow.",
+      "acceptance": [
+        "Planner produces a task plan",
+        "Writer produces channel drafts",
+        "Reviewer enforces denylist and tone constraints",
+        "Analyst produces a JSON eval report"
+      ],
+      "passes": false
+    },
+    {
+      "id": "T4",
+      "title": "Channel templates",
+      "description": "Add channel-specific templates and constraints for email, paid social, and search ads.",
+      "acceptance": [
+        "Email includes subject, preview, body, CTA",
+        "Paid social includes LinkedIn + Meta variations",
+        "Search ads include 5 headlines + 4 descriptions"
+      ],
+      "passes": false
+    },
+    {
+      "id": "T5",
+      "title": "Evaluation rules",
+      "description": "Implement scoring rules per channel and a pass/fail summary.",
+      "acceptance": [
+        "Per-channel rubric scores",
+        "Fail if denylist appears",
+        "Fail if claims not found in brief"
+      ],
+      "passes": false
+    },
+    {
+      "id": "T6",
+      "title": "Sample run + docs",
+      "description": "Provide a sample run command and a short README describing Lucy Light and the loop.",
+      "acceptance": [
+        "README includes purpose, usage, outputs",
+        "Sample output files created",
+        "End-to-end run described"
+      ],
+      "passes": false
+    }
+  ]
+}
