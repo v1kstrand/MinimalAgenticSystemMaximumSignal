@@ -1,0 +1,26 @@
+{
+  "maxRetries": 2,
+  "toneStrictness": "medium",
+  "budgetHint": "low",
+  "models": {
+    "planner": "gpt-4o-mini",
+    "writer": "gpt-4o-mini",
+    "reviewer": "gpt-4o-mini"
+  },
+  "dynamicModelSelection": false,
+  "modelRange": {
+    "min": "gpt-4.1-nano",
+    "max": "gpt-4o-mini"
+  },
+  "alwaysUseLlmJudge": true,
+  "hitlEnabled": false,
+  "guardrails": {
+    "pii": {
+      "mode": "warn"
+    },
+    "safety": {
+      "mode": "warn",
+      "model": "gpt-4.1-mini"
+    }
+  }
+}

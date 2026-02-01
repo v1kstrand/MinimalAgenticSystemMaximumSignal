@@ -1,0 +1,19 @@
+.env
+.venv/
+# Node / TS
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Generated outputs
+data/outputs/
+
+# Ralph loop logs
+.plans/logs/
+
+# Secrets
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/

@@ -37,7 +37,7 @@
         "CLI accepts --brief, --brand, --denylist",
         "data/outputs/ is created on run"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "T2",
@@ -48,7 +48,7 @@
         "Brand voice fields extracted",
         "Denylist loaded and enforced"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "T3",
@@ -60,7 +60,7 @@
         "Reviewer enforces denylist and tone constraints",
         "Analyst produces a JSON eval report"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "T4",
@@ -71,7 +71,7 @@
         "Paid social includes LinkedIn + Meta variations",
         "Search ads include 5 headlines + 4 descriptions"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "T5",
@@ -82,7 +82,7 @@
         "Fail if denylist appears",
         "Fail if claims not found in brief"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "T6",
@@ -93,7 +93,7 @@
         "Sample output files created",
         "End-to-end run described"
       ],
-      "passes": false
+      "passes": true
     }
   ]
 }

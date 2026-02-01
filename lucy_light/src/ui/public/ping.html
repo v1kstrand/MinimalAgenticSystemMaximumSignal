@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eval Ping</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 16px;
+      }
+      pre {
+        background: #f2f2f2;
+        padding: 8px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Eval SSE Ping</h1>
+    <pre id="log"></pre>
+    <script>
+      const log = document.getElementById("log");
+      const es = new EventSource("/api/eval-ping");
+      es.addEventListener("message", (event) => {
+        log.textContent += `${event.data}\n`;
+      });
+      es.addEventListener("error", () => {
+        log.textContent += "error\n";
+      });
+    </script>
+  </body>
+</html>

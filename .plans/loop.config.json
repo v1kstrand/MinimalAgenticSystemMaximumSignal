@@ -1,6 +1,6 @@
 {
   "agentCommand": "codex",
-  "agentArgs": ["--prompt-file"],
+  "agentArgs": ["exec", "--profile", "default", "{prompt_text}"],
   "maxIterations": 8,
   "completionRegex": "<promise>COMPLETE</promise>",
   "logDir": ".plans/logs",

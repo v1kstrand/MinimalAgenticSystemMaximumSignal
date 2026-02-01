@@ -1,0 +1,18 @@
+{
+  "start": "planner",
+  "nodes": {
+    "planner": { "type": "planner" },
+    "writer": { "type": "writer" },
+    "reviewer": { "type": "reviewer" },
+    "analyst": { "type": "analyst" },
+    "done": { "type": "done" }
+  },
+  "edges": [
+    { "from": "planner", "to": "writer" },
+    { "from": "writer", "to": "reviewer" },
+    { "from": "reviewer", "to": "planner", "when": "missing_facts" },
+    { "from": "reviewer", "to": "planner", "when": "review_failed" },
+    { "from": "reviewer", "to": "analyst", "when": "review_passed" },
+    { "from": "analyst", "to": "done" }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "resp_075fd4f1f16a29c200697d2f23253481948c8f1414436183f6",
+  "created_at": 1769811748.0,
+  "error": null,
+  "incomplete_details": {
+    "reason": "max_output_tokens"
+  },
+  "instructions": null,
+  "metadata": {},
+  "model": "gpt-5.1-2025-11-13",
+  "object": "response",
+  "output": [
+    {
+      "id": "rs_075fd4f1f16a29c200697d2f2511fc8194aec29d4cdd68eeee",
+      "summary": [],
+      "type": "reasoning",
+      "content": null,
+      "encrypted_content": null,
+      "status": null
+    }
+  ],
+  "parallel_tool_calls": true,
+  "temperature": 1.0,
+  "tool_choice": "auto",
+  "tools": [],
+  "top_p": 1.0,
+  "background": false,
+  "completed_at": null,
+  "conversation": null,
+  "max_output_tokens": 4000,
+  "max_tool_calls": null,
+  "previous_response_id": null,
+  "prompt": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": null,
+  "reasoning": {
+    "effort": "high",
+    "generate_summary": null,
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "status": "incomplete",
+  "text": {
+    "format": {
+      "name": "repo_review",
+      "schema_": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "critical_issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "file": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "file"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "score",
+          "critical_issues"
+        ],
+        "additionalProperties": false
+      },
+      "type": "json_schema",
+      "description": null,
+      "strict": true
+    },
+    "verbosity": "medium"
+  },
+  "top_logprobs": 0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 5813,
+    "input_tokens_details": {
+      "cached_tokens": 5760
+    },
+    "output_tokens": 4000,
+    "output_tokens_details": {
+      "reasoning_tokens": 4000
+    },
+    "total_tokens": 9813
+  },
+  "user": null,
+  "billing": {
+    "payer": "openai"
+  },
+  "frequency_penalty": 0.0,
+  "presence_penalty": 0.0,
+  "store": true
+}

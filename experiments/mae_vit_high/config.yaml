@@ -1,0 +1,35 @@
+seed: 42
+device: "cuda"
+output_dir: "checkpoints"
+
+model:
+  img_size: 64
+  patch_size: 8
+  in_chans: 3
+  embed_dim: 256
+  depth: 6
+  num_heads: 8
+  mlp_ratio: 4.0
+  decoder_embed_dim: 128
+  decoder_depth: 4
+  decoder_num_heads: 4
+  mask_ratio: 0.75
+
+training:
+  batch_size: 64
+  epochs: 10
+  lr: 1.0e-3
+  weight_decay: 0.0
+  num_workers: 2
+  print_freq: 10
+  resume: false
+  checkpoint_path: "checkpoints/mae_vit.pth"
+  eval_interval: 1
+
+dataset:
+  name: "synthetic"
+  image_size: 64
+  in_chans: 3
+  train_size: 2048
+  val_size: 256
+  image_folder_path: ""

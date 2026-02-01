@@ -1,0 +1,32 @@
+Create a complete, runnable MAE ViT self-supervised training repo in the current directory.
+
+STRICT SCOPE (do not exceed):
+- Create ONLY the files listed below.
+- Do NOT add extra files, folders, or features.
+- Do NOT add distributed training, mixed precision, wandb, or advanced optimizers.
+- Keep the code concise but complete.
+
+REQUIRED FILES (exact names):
+- config.yaml
+- model.py
+- dataset.py
+- train.py
+- losses.py
+- metrics.py
+- utils.py
+- README.md
+- requirements.txt
+
+FUNCTIONAL REQUIREMENTS (must all be met):
+- Pure PyTorch (no Lightning).
+- MAE ViT encoder/decoder with patchify + masking.
+- Train loop + eval loop.
+- Checkpoint save/load.
+- Seed + determinism.
+- Config-driven: load config.yaml; allow CLI overrides.
+- Dataset: include a synthetic dataset option (no external downloads).
+- Logging: simple stdout logging per epoch.
+
+OUTPUT RULES:
+- Output only file contents (no explanations).
+- Do not include code fences.

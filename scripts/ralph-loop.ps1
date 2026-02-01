@@ -6,7 +6,7 @@ param(
 
 $defaults = [ordered]@{
   agentCommand   = "codex"
-  agentArgs      = @("--prompt-file")
+  agentArgs      = @("exec", "--profile", "default", "{prompt_text}")
   maxIterations  = 8
   completionRegex = "<promise>COMPLETE</promise>"
   logDir         = ".plans/logs"
@@ -58,9 +58,13 @@ for ($i = 1; $i -le $maxIterations; $i++) {
 
   $finalArgs = @()
   $usedPlaceholder = $false
+  $promptText = Get-Content $promptPath -Raw
   foreach ($arg in $agentArgs) {
     if ($arg -eq \"{prompt}\") {
       $finalArgs += $promptPath
+      $usedPlaceholder = $true
+    } elseif ($arg -eq \"{prompt_text}\") {
+      $finalArgs += $promptText
       $usedPlaceholder = $true
     } else {
       $finalArgs += $arg
@@ -78,8 +82,19 @@ for ($i = 1; $i -le $maxIterations; $i++) {
     exit $exitCode
   }
 
-  $logText = Get-Content $logPath -Raw
-  if ($logText -match $completionRegex) {
+  $logLines = Get-Content $logPath
+  $startIndex = 0
+  for ($idx = $logLines.Count - 1; $idx -ge 0; $idx--) {
+    if ($logLines[$idx].Trim() -eq "codex") {
+      $startIndex = $idx + 1
+      break
+    }
+  }
+  if ($startIndex -lt 0) {
+    $startIndex = 0
+  }
+  $segment = if ($logLines.Count -gt 0) { ($logLines[$startIndex..($logLines.Count - 1)]) -join "`n" } else { "" }
+  if ($segment -match $completionRegex) {
     Write-Host "Loop complete: completion marker found."
     exit 0
   }

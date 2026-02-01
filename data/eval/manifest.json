@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "id": "signalship",
+      "brief": "data/eval/brief-signalship.md",
+      "brand": "data/brand.md",
+      "denylist": "data/do-not-say.txt"
+    },
+    {
+      "id": "pulsedesk",
+      "brief": "data/eval/brief-pulsedesk.md",
+      "brand": "data/brand.md",
+      "denylist": "data/do-not-say.txt"
+    },
+    {
+      "id": "lumencrate",
+      "brief": "data/eval/brief-lumencrate.md",
+      "brand": "data/brand.md",
+      "denylist": "data/do-not-say.txt"
+    }
+  ]
+}

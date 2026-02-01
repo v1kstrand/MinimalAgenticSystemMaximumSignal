@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lucy Light UI</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Lucy Light</h1>
+      <p>Single window UI with three tabs: Inputs, Graph, Outputs.</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="inputs">Inputs</button>
+      <button class="tab" data-tab="graph">Graph</button>
+      <button class="tab" data-tab="outputs">Outputs</button>
+      <button class="tab" data-tab="eval">Eval</button>
+      <button class="tab" data-tab="benchmark">Benchmark</button>
+    </nav>
+
+    <main>
+      <section id="inputs" class="panel active">
+        <div class="row">
+          <div class="col">
+            <label>Brief</label>
+            <textarea id="brief" rows="10" spellcheck="false"></textarea>
+          </div>
+          <div class="col">
+            <label>Brand</label>
+            <textarea id="brand" rows="10" spellcheck="false"></textarea>
+          </div>
+          <div class="col">
+            <label>Denylist</label>
+            <textarea id="denylist" rows="10" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label>Output label (prefix)</label>
+            <input id="output-label" type="text" placeholder="e.g. demo-run-1" />
+          </div>
+        </div>
+        <div class="actions">
+          <button id="load-defaults">Load defaults</button>
+          <button id="run">Run pipeline</button>
+          <label class="inline-check">
+            <input id="include-eval" type="checkbox" checked />
+            Include eval after pass
+          </label>
+          <label class="inline-check">
+            <input id="policy-hitl" type="checkbox" />
+            HITL approval gate
+          </label>
+        </div>
+        <div class="policy">
+          <h3>Policy</h3>
+          <div class="policy-box">
+            <div class="policy-section">
+              <div class="policy-section-header">
+                <h4>Quality &amp; tone</h4>
+                <span class="policy-help">Set how strict the assistant should be.</span>
+              </div>
+              <div class="policy-grid">
+                <label>
+                  Max retries
+                  <input id="policy-max-retries" type="number" min="0" max="5" value="2" />
+                </label>
+                <label>
+                  Tone strictness
+                  <select id="policy-tone">
+                    <option value="low">low</option>
+                    <option value="medium" selected>medium</option>
+                    <option value="high">high</option>
+                  </select>
+                </label>
+                <label>
+                  Budget hint
+                  <select id="policy-budget">
+                    <option value="low" selected>low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div class="policy-section">
+              <div class="policy-section-header">
+                <h4>Model strategy</h4>
+                <button
+                  class="policy-toggle"
+                  type="button"
+                  data-target="policy-model-advanced"
+                  data-label="Advanced models"
+                  data-label-open="Hide models"
+                >
+                  Advanced models
+                </button>
+              </div>
+              <span class="policy-help">Pick fixed models or a dynamic range.</span>
+              <div class="policy-grid">
+                <label class="inline-check">
+                  Dynamic model selection
+                  <input id="policy-dynamic-models" type="checkbox" />
+                </label>
+              </div>
+              <div id="policy-model-range" class="policy-advanced hidden">
+                <div class="policy-grid">
+                  <label>
+                    Min model
+                    <select id="policy-model-min">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                  <label>
+                    Max model
+                    <select id="policy-model-max">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+              <div id="policy-model-advanced" class="policy-advanced hidden">
+                <div class="policy-grid">
+                  <label>
+                    Planner model
+                    <select id="policy-model-planner">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                  <label>
+                    Writer model
+                    <select id="policy-model-writer">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                  <label>
+                    Reviewer model
+                    <select id="policy-model-reviewer">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="policy-section">
+              <div class="policy-section-header">
+                <h4>Safety &amp; guardrails</h4>
+                <button
+                  class="policy-toggle"
+                  type="button"
+                  data-target="policy-safety-advanced"
+                  data-label="Advanced safety"
+                  data-label-open="Hide safety"
+                >
+                  Advanced safety
+                </button>
+              </div>
+              <span class="policy-help">Flag or block risky inputs before generation.</span>
+              <div class="policy-grid">
+                <label>
+                  PII guardrail
+                  <select id="policy-guard-pii">
+                    <option value="warn" selected>warn</option>
+                    <option value="block">block</option>
+                  </select>
+                </label>
+                <label>
+                  Safety guardrail
+                  <select id="policy-guard-safety">
+                    <option value="warn" selected>warn</option>
+                    <option value="block">block</option>
+                  </select>
+                </label>
+              </div>
+              <div id="policy-safety-advanced" class="policy-advanced hidden">
+                <div class="policy-grid">
+                  <label>
+                    Safety model
+                    <select id="policy-guard-model">
+                      <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                      <option value="gpt-4.1-mini" selected>gpt-4.1-mini</option>
+                      <option value="gpt-4o-mini">gpt-4o-mini</option>
+                      <option value="gpt-4o">gpt-4o</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <div id="paths"></div>
+          <div id="status"></div>
+        </div>
+      </section>
+
+      <section id="graph" class="panel">
+        <div class="graph">
+          <div class="node" data-node="planner">Planner</div>
+          <div class="node" data-node="writer">Writer</div>
+          <div class="node" data-node="reviewer">Reviewer</div>
+          <div class="node" data-node="analyst">Analyst</div>
+          <div class="node" data-node="done">Done</div>
+        </div>
+        <div class="actions">
+          <button id="play-trace">Play trace</button>
+        </div>
+        <pre id="trace"></pre>
+        <div class="log-panel">
+          <label>Live log</label>
+          <pre id="log"></pre>
+        </div>
+        <div id="hitl-panel" class="hitl-panel inactive">
+          <div class="hitl-header">
+            <h3>HITL Review Gate</h3>
+            <div id="hitl-status"></div>
+          </div>
+          <div class="hitl-body">
+            <div>
+              <label>Reviewer issues</label>
+              <pre id="hitl-issues"></pre>
+            </div>
+            <div>
+              <label>Writer drafts</label>
+              <div class="hitl-tabs">
+                <button class="hitl-tab active" data-hitl="email">Email</button>
+                <button class="hitl-tab" data-hitl="paid-social">Paid social</button>
+                <button class="hitl-tab" data-hitl="search-ads">Search ads</button>
+              </div>
+              <div class="hitl-drafts">
+                <pre class="hitl-draft active" data-hitl="email"></pre>
+                <pre class="hitl-draft" data-hitl="paid-social"></pre>
+                <pre class="hitl-draft" data-hitl="search-ads"></pre>
+              </div>
+            </div>
+            <div>
+              <label>Your feedback (sent to planner)</label>
+              <textarea id="hitl-feedback" rows="6" spellcheck="false"></textarea>
+            </div>
+          </div>
+          <div class="hitl-actions">
+            <button id="hitl-approve">Approve drafts</button>
+            <button id="hitl-reject">Request changes</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="outputs" class="panel">
+        <div class="row">
+          <div class="col">
+            <label>Campaign brief</label>
+            <pre id="campaign-brief"></pre>
+          </div>
+          <div class="col">
+            <label>Email</label>
+            <pre id="email"></pre>
+          </div>
+          <div class="col">
+            <label>Paid social</label>
+            <pre id="paid-social"></pre>
+          </div>
+          <div class="col">
+            <label>Search ads</label>
+            <pre id="search-ads"></pre>
+          </div>
+          <div class="col">
+            <label>Eval report</label>
+            <pre id="report"></pre>
+          </div>
+          <div class="col">
+            <label>Run log</label>
+            <pre id="run-log"></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="eval" class="panel">
+        <div class="actions">
+          <button id="run-eval">Run eval</button>
+        </div>
+        <div class="meta">
+          <div id="eval-status"></div>
+        </div>
+        <div class="eval-config">
+          <label>Eval config</label>
+          <table class="config-table">
+            <tbody>
+              <tr>
+                <td>Baseline</td>
+                <td><select id="eval-baseline"></select></td>
+              </tr>
+              <tr>
+                <td>Eval model</td>
+                <td>
+                  <select id="eval-model">
+                    <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                    <option value="gpt-4.1-mini" selected>gpt-4.1-mini</option>
+                    <option value="gpt-4o-mini">gpt-4o-mini</option>
+                    <option value="gpt-4o">gpt-4o</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td>Regression gate</td>
+                <td><input id="eval-regression" type="checkbox" checked /></td>
+              </tr>
+              <tr>
+                <td>Pairwise (run vs baseline)</td>
+                <td><input id="eval-pairwise" type="checkbox" /></td>
+              </tr>
+              <tr>
+                <td>Eval label</td>
+                <td><input id="eval-label" type="text" placeholder="optional" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="eval-target">
+          <label>Evaluate run</label>
+          <div class="eval-history-grid">
+            <div>
+              <div class="compare-list" id="eval-run-target-list"></div>
+              <label class="inline-check">
+                <input id="eval-include-failed" type="checkbox" />
+                Include failed runs
+              </label>
+            </div>
+            <div class="eval-history-meta">
+              <div id="eval-run-target-meta"></div>
+            </div>
+          </div>
+        </div>
+        <div class="eval-pairwise">
+          <div class="pairwise-header">
+            <label>Pairwise prompt</label>
+            <button id="eval-pairwise-edit" type="button">Edit</button>
+          </div>
+          <div id="eval-pairwise-editor" class="pairwise-editor">
+            <input id="eval-pairwise-file" type="file" accept=".txt" />
+            <textarea id="eval-pairwise-prompt" rows="8" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="eval-history">
+          <label>Eval runs</label>
+          <div class="eval-history-grid">
+            <div>
+              <div class="compare-list" id="eval-run-list"></div>
+              <div class="button-row">
+                <button id="eval-show">Show selected</button>
+                <button id="eval-remove">Remove selected</button>
+              </div>
+            </div>
+            <div class="eval-history-meta">
+              <div id="eval-run-meta"></div>
+            </div>
+          </div>
+        </div>
+        <div class="eval-progress hidden" id="eval-progress-panel">
+          <div id="eval-progress-text"></div>
+          <ul id="eval-progress-list"></ul>
+        </div>
+        <div class="eval-log">
+          <label>Eval log</label>
+          <pre id="eval-log"></pre>
+        </div>
+        <table id="eval-table">
+          <thead>
+            <tr>
+              <th data-sort="runId">Run</th>
+              <th>Case</th>
+              <th data-sort="factuality">Factuality</th>
+              <th data-sort="denylist">Denylist</th>
+              <th data-sort="consistency">Consistency</th>
+              <th data-sort="safety">Safety</th>
+              <th data-sort="pairwiseWin">Pairwise Win</th>
+              <th data-sort="pairwiseConf">Pairwise Conf</th>
+              <th data-sort="delta">Delta</th>
+              <th data-sort="score">Score</th>
+              <th data-sort="pass">Pass</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="benchmark" class="panel">
+        <div class="actions">
+          <button id="refresh-benchmarks">Refresh benchmarks</button>
+          <label class="inline-check">
+            <input id="bench-include-failed" type="checkbox" />
+            Include failed runs
+          </label>
+        </div>
+        <div class="meta">
+          <div id="benchmark-status"></div>
+        </div>
+        <div class="benchmark-summary">
+          <label>Latest benchmark</label>
+          <div id="benchmark-cards" class="benchmark-cards"></div>
+          <div id="benchmark-bars" class="benchmark-bars"></div>
+          <details id="benchmark-json">
+            <summary>Show raw JSON</summary>
+            <pre id="benchmark-latest"></pre>
+          </details>
+        </div>
+        <div class="benchmark-compare">
+          <label>Compare runs</label>
+          <div class="benchmark-compare-grid">
+            <div>
+              <div class="compare-list" id="benchmark-list"></div>
+              <button id="benchmark-plot">Plot selected</button>
+            </div>
+            <div>
+              <div class="compare-note">Showing total tokens per run.</div>
+            </div>
+          </div>
+          <div id="benchmark-compare-bars" class="benchmark-bars"></div>
+        </div>
+        <table id="benchmark-table">
+          <thead>
+            <tr>
+              <th>Run</th>
+              <th>Planner</th>
+              <th>Writer</th>
+              <th>Reviewer</th>
+              <th>Total tokens</th>
+              <th>Reasoning</th>
+              <th>Total ms</th>
+              <th>Failures</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

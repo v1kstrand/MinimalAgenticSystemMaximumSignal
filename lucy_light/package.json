@@ -1,0 +1,21 @@
+{
+  "name": "lucy-light",
+  "version": "0.1.0",
+  "description": "Lucy Light CLI for generating marketing content from briefs",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "bin": {
+    "lucy-light": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "ui": "node dist/ui/server.js",
+    "eval": "node dist/eval/run.js",
+    "golden": "node dist/eval/generate_golden.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "typescript": "^5.4.0"
+  }
+}
