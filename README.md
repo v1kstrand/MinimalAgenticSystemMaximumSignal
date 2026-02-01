@@ -1,30 +1,28 @@
-# Lucy Light (LL) — Minimal Agentic System, Maximum Signal
+# Lucy Light (LL) - Compact Agentic System for Marketing Ops
 
-Lucy Light is a compact, interview‑ready agentic system that demonstrates the core ideas of modern AI agents without the overhead of a full production stack. It turns a product brief into multi‑channel marketing assets, then evaluates, guards, and iterates the output with a lightweight agent loop, HITL gates, and safety guardrails.
+Lucy Light turns a product brief into multi-channel marketing assets, then evaluates, guards, and iterates the output with a lightweight agent loop, HITL gates, and safety guardrails. It is deliberately small, so the full workflow is easy to understand, explain, and demo.
 
-If you want to show “senior‑level” agentic thinking in a small footprint, LL is the proof: it is deliberately minimal while still demonstrating orchestration, evaluation, safety, and human approvals.
+## What It Demonstrates
 
-## Why This Is Interview‑Ready
-
-**Agentic orchestration**
-- Planner → Writer → Reviewer → Analyst pipeline
+Agentic orchestration
+- Planner -> Writer -> Reviewer -> Analyst pipeline
 - Iterative loop with retries and reviewer feedback
 
-**Evaluation & monitoring**
+Evaluation and monitoring
 - Baseline comparison (regression)
 - Pairwise LLM judge (run vs baseline)
 - Benchmark logs for cost/latency analysis
 
-**Guardrails & safety**
+Guardrails and safety
 - Deterministic PII detection
 - LLM safety classifier for prompt injection
 - Warn vs block modes
 
-**Human‑in‑the‑loop**
+Human-in-the-loop
 - Approval gate after reviewer
 - Human feedback injected back into planning loop
 
-In short: LL hits the fundamentals—**planning, review/reflection, safety, evaluation, and HITL**—while remaining easy to understand and demo.
+In short: LL hits the fundamentals (planning, review/reflection, safety, evaluation, HITL) without heavy infrastructure.
 
 ---
 
@@ -33,9 +31,9 @@ In short: LL hits the fundamentals—**planning, review/reflection, safety, eval
 ## Architecture (Core Loop)
 
 ```
-Planner → Writer → Reviewer → Analyst → Done
-         ↑                 |
-         └───────(retry)───┘
+Planner -> Writer -> Reviewer -> Analyst -> Done
+         ^                 |
+         +-----(retry)-----+
 ```
 
 Optional HITL gate pauses after Reviewer for human approval.
@@ -60,42 +58,42 @@ ralph/
 
 ## Key Features
 
-### 1) Agent pipeline
+1) Agent pipeline
 - Planner produces plan + research summary
 - Writer generates drafts (email, paid social, search ads)
 - Reviewer enforces grounding/denylist/tone
 - Analyst scores outputs
 
-### 2) Eval system
+2) Eval system
 - Regression against baselines
 - Pairwise LLM judge (run vs baseline)
 - Eval history + comparison in UI
 
-### 3) Guardrails
+3) Guardrails
 - PII scan (deterministic)
 - Safety/jailbreak classifier (LLM)
 - Warn vs block modes
 
-### 4) HITL gate
+4) HITL gate
 - Human approval before finalizing outputs
-- Feedback is injected into the next iteration
+- Feedback injected into the next iteration
 
 ---
 
 # Quick Start
 
-## Install & Build
+Install and build
 ```
 npm --prefix lucy_light install
 npm --prefix lucy_light run build
 ```
 
-## Run CLI
+Run CLI
 ```
 npm --prefix lucy_light run start -- --brief data/brief.md --brand data/brand.md --denylist data/do-not-say.txt
 ```
 
-## Run UI
+Run UI
 ```
 npm --prefix lucy_light run ui
 ```
@@ -103,36 +101,34 @@ Open: http://localhost:8787
 
 ---
 
-# Demo Script (Interview‑Friendly)
+# Demo Script
 
-1) Open UI → Inputs tab  
-2) Enable HITL gate  
-3) Run pipeline  
-4) Approve or reject drafts in the HITL panel  
-5) Run eval vs baseline (pairwise + regression)  
-6) Show benchmark tab (tokens + latency)  
+1) Open UI -> Inputs tab
+2) Enable HITL gate
+3) Run pipeline
+4) Approve or reject drafts in the HITL panel
+5) Run eval vs baseline (pairwise + regression)
+6) Show benchmark tab (tokens + latency)
 
 ---
 
 # Interview Framing (Senior Lens)
 
-**Agent Development & Orchestration**
-- Explicit plan‑execute‑review‑analyze loop  
-- Feedback loop with retries + human overrides  
+Agent Development and Orchestration
+- Plan-execute-review-analyze loop
+- Feedback loop with retries + human overrides
 
-**Evaluation & Safety**
-- Regression guardrails for output quality  
-- Pairwise LLM judge for subjective comparison  
-- Input guardrails (PII + injection detection)  
+Evaluation and Safety
+- Regression guardrails for output quality
+- Pairwise LLM judge for subjective comparison
+- Input guardrails (PII + injection detection)
 
-**Monitoring & Observability**
-- Token usage and latency logging  
-- Benchmark history for cost/quality tradeoffs  
+Monitoring and Observability
+- Token usage and latency logging
+- Benchmark history for cost/quality tradeoffs
 
 ---
 
 # Notes
 
-This is a toy system by design. The value is in how many *agentic primitives* it exposes in a single, explainable app:
-planning, routing, evaluation, safety, and HITL.
-
+This is a toy system by design. The value is in how many agentic primitives it exposes in a single, explainable app: planning, routing, evaluation, safety, and HITL.
