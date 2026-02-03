@@ -1,6 +1,6 @@
-# Lucy Light (LL) - Compact Agentic System for Marketing Ops
+Compact Agentic System for Marketing Ops
 
-Lucy Light turns a product brief into multi-channel marketing assets, then evaluates, guards, and iterates the output with a lightweight agent loop, HITL gates, and safety guardrails. It is deliberately small, so the full workflow is easy to understand, explain, and demo.
+MASM (MinimalAgenticSystemMaximumSignal) turns a product brief into multi-channel marketing assets, then evaluates, guards, and iterates the output with a lightweight agent loop, HITL gates, and safety guardrails. It is deliberately small, so the full workflow is easy to understand, explain, and demo.
 
 ## What It Demonstrates
 
@@ -22,7 +22,7 @@ Human-in-the-loop
 - Approval gate after reviewer
 - Human feedback injected back into planning loop
 
-In short: LL hits the fundamentals (planning, review/reflection, safety, evaluation, HITL) without heavy infrastructure.
+In short: MASM hits the fundamentals (planning, review/reflection, safety, evaluation, HITL) without heavy infrastructure.
 
 ---
 
@@ -110,25 +110,3 @@ Open: http://localhost:8787
 5) Run eval vs baseline (pairwise + regression)
 6) Show benchmark tab (tokens + latency)
 
----
-
-# Interview Framing (Senior Lens)
-
-Agent Development and Orchestration
-- Plan-execute-review-analyze loop
-- Feedback loop with retries + human overrides
-
-Evaluation and Safety
-- Regression guardrails for output quality
-- Pairwise LLM judge for subjective comparison
-- Input guardrails (PII + injection detection)
-
-Monitoring and Observability
-- Token usage and latency logging
-- Benchmark history for cost/quality tradeoffs
-
----
-
-# Notes
-
-This is a toy system by design. The value is in how many agentic primitives it exposes in a single, explainable app: planning, routing, evaluation, safety, and HITL.
