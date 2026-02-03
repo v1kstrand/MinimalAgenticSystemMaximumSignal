@@ -31,7 +31,7 @@ In short: MASM hits the fundamentals (planning, review/reflection, safety, evalu
 ## Architecture (Core Loop)
 
 ```
-Planner -> Writer -> Reviewer -> Analyst -> Done
+Planner -> Writer -> Reviewer -> Analyst -> Eval 
          ^                 |
          +-----(retry)-----+
 ```
